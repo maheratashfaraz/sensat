@@ -1,0 +1,29 @@
+{
+  "name": "frontend-test",
+  "version": "0.2.0",
+  "private": true,
+  "browserslist": [
+    "last 1 Chrome versions",
+    "last 1 Firefox versions"
+  ],
+  "scripts": {
+    "start-api": "node api",
+    "start": "parcel src/index.html --open"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "axios": "^0.20.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
+    "express": "^4.17.1",
+    "faker": "^4.1.0",
+    "parcel-bundler": "^1.12.4"
+  }
+}
