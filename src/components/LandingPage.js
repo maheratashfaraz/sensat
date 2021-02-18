@@ -4,17 +4,25 @@ import { connect } from 'react-redux';
 import Header from './Header'
 import MapWrapper from './MapWrapper'
 import "../style.css";
-
-function LandingPage() {
+import SwitchPageButton from './SwitchPageButton'
+import ListWrapper from './ListWrapper'
+function LandingPage(props) {
 
     return (
         <>
             <Header />
-            <MapWrapper />
+            <SwitchPageButton />
+            {props.currentPage === 'List' ? <MapWrapper /> : <ListWrapper />}
         </>
     );
 }
 
-export default connect(null, null)(LandingPage);
+function mapStateToProps(state) {
+    return {
+        currentPage: state.currentPage.page,
+    }
+}
+
+export default connect(mapStateToProps, null)(LandingPage);
 
 LandingPage.propTypes = {}
