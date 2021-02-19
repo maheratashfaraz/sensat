@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {
     CircleMarker, Popup
 } from 'react-leaflet';
@@ -54,6 +55,10 @@ function CircleMarkerWithPopup(props) {
                 </Paper>
             </Popup>
         </CircleMarker >)
+}
+
+CircleMarkerWithPopup.propTypes = {
+    item: PropTypes.object,
 }
 
 

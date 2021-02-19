@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -14,22 +15,17 @@ const useStyles = makeStyles((theme) => ({
     formControl: {
         margin: theme.spacing(1),
         minWidth: 120,
-    },
-    selectEmpty: {
-        marginTop: theme.spacing(2),
-    },
-
-
+    }
 }))
 
 function SensorDateDropdown(props) {
     const classes = useStyles()
-
     const [name, setName] = React.useState('');
 
     const handleChange = (event) => {
         props.setSensorName(event.target.value)
     };
+
     useEffect(() => {
         setName(props.sensorName)
     }, [props.sensorName])
@@ -52,11 +48,17 @@ function SensorDateDropdown(props) {
         </FormControl>)
 }
 
+SensorDateDropdown.propTypes = {
+    sensorName: PropTypes.string,
+    setSensorName: PropTypes.func
+}
+
 function mapStateToProps(state) {
     return {
         sensorName: state.sensorName.name,
     }
 }
+
 function mapDispatchToProps(dispatch) {
     return {
         dispatch,

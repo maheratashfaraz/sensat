@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { MapContainer, TileLayer } from 'react-leaflet'
+import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { makeStyles } from '@material-ui/styles'
 import data from '../data/sensor_readings'
 import setSensors from '../actions/setSensors'
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import MarkerClusterGroup from 'react-leaflet-markercluster';
 import CircleMarkerWithPopup from './CircleMarkerWithPopup'
 
 
@@ -36,10 +37,16 @@ function MapWrapper(props) {
                     return (item.sensor_type === props.sensorType && item.name === props.sensorName)
                 }).map((item, index) => {
                     return <CircleMarkerWithPopup key={index} item={item} />
-
                 })}
             </MarkerClusterGroup>
         </MapContainer >);
+}
+
+MapWrapper.propTypes = {
+    sensors: PropTypes.array,
+    sensorType: PropTypes.string,
+    sensorName: PropTypes.string,
+    setSensors: PropTypes.func
 }
 
 function mapStateToProps(state) {
@@ -47,10 +54,9 @@ function mapStateToProps(state) {
         sensors: state.sensors.sensors,
         sensorType: state.sensorType.type,
         sensorName: state.sensorName.name,
-
-
     }
 }
+
 function mapDispatchToProps(dispatch) {
     return {
         dispatch,

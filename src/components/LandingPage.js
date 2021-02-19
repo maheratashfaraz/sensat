@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import Header from './Header'
 import MapWrapper from './MapWrapper'
-import "../style.css";
 import SwitchPageButton from './SwitchPageButton'
 import ListWrapper from './ListWrapper'
+import "../style.css";
+
 function LandingPage(props) {
 
     return (
@@ -17,6 +18,11 @@ function LandingPage(props) {
     );
 }
 
+LandingPage.propTypes = {
+    currentPage: PropTypes.string,
+}
+
+
 function mapStateToProps(state) {
     return {
         currentPage: state.currentPage.page,
@@ -25,4 +31,3 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, null)(LandingPage);
 
-LandingPage.propTypes = {}

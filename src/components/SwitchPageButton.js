@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import {
     Fab
 } from '@material-ui/core'
@@ -7,7 +8,7 @@ import setCurrentPage from '../actions/setCurrentPage'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     root: {
         position: 'fixed',
         top: '82px',
@@ -16,12 +17,13 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-
 function SwitchPageButton(props) {
     const classes = useStyles()
+
     const handleClick = () => {
         props.setCurrentPage(props.currentPage === 'List' ? 'Map' : 'List')
     }
+
     return (
         <Fab
             color="secondary"
@@ -33,6 +35,10 @@ function SwitchPageButton(props) {
         </Fab>)
 }
 
+SwitchPageButton.propTypes = {
+    currentPage: PropTypes.string,
+    setCurrentPage: PropTypes.func
+}
 
 function mapStateToProps(state) {
     return {

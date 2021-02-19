@@ -1,18 +1,9 @@
-import React, { useState, Fragment } from 'react';
-import {
-    Fab, Box
-} from '@material-ui/core'
+import React from 'react';
+import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import Sensor from './Sensor'
-
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import sortList from '../helper/sortList'
-// import Pagination from 'rc-pagination';
 import Pagination from '@material-ui/lab/Pagination';
 
 const useStyles = makeStyles((theme) => ({
@@ -39,10 +30,6 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         marginTop: '38px'
     },
-    formControl: {
-        margin: theme.spacing(1),
-        maxWidth: 120,
-    },
     paginator: {
         justifyContent: "center",
         paddingTop: "20px"
@@ -52,38 +39,18 @@ const useStyles = makeStyles((theme) => ({
 
 function ListWrapper(props) {
     const classes = useStyles()
-    // const [sortBy, setSortBy] = React.useState('type');
-    const [currentPage, setCurrentPage] = useState(1);
-
-    const handleChange = (event) => {
-        setSortBy(event.target.value)
-    };
-
     const itemsPerPage = 50;
     const [page, setPage] = React.useState(1);
     const [noOfPages] = React.useState(
         Math.ceil(props.sensors.length / itemsPerPage)
     );
+
     const handlePageChange = (event, value) => {
         setPage(value);
     };
 
     return (
         <div className={classes.container}>
-            {/* <div>
-                <FormControl className={classes.formControl} color='secondary'>
-                    <InputLabel color='secondary' id="demo-simple-select-label">Sort By:</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={sortBy}
-                        onChange={handleChange}
-                    >
-                        <MenuItem value='date'>Date</MenuItem>
-                        <MenuItem value='type'>Type</MenuItem>
-                    </Select>
-                </FormControl>
-            </div> */}
             <div className={classes.root}>
                 <div className={classes.sensorListContainer}>
                     {props.sensors && sortList(props.sensors, props.sortBy)
@@ -106,10 +73,13 @@ function ListWrapper(props) {
                     classes={{ ul: classes.paginator }}
                 />
             </div>
-
         </div>)
 }
 
+ListWrapper.propTypes = {
+    sensors: PropTypes.array,
+    sortBy: PropTypes.string,
+}
 
 function mapStateToProps(state) {
     return {
@@ -117,7 +87,5 @@ function mapStateToProps(state) {
         sortBy: state.sortBy.kind
     }
 }
-
-
 
 export default connect(mapStateToProps, null)(ListWrapper);

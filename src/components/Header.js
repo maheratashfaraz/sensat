@@ -1,4 +1,5 @@
 import * as React from "react";
+import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import {
@@ -12,7 +13,7 @@ import SortByDropDown from './SortByDropDown'
 
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     root: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -38,9 +39,12 @@ function Header(props) {
     );
 }
 
+Header.propTypes = {
+    currentPage: PropTypes.string,
+}
+
 
 function mapStateToProps(state) {
-    console.log('This is current page ', state.currentPage.page)
     return {
         currentPage: state.currentPage.page,
     }
