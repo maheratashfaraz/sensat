@@ -1,4 +1,6 @@
 import * as React from "react";
+import { makeStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
 import {
     AppBar,
     Toolbar,
@@ -6,7 +8,8 @@ import {
 } from "@material-ui/core";
 import SensorTypeDropDown from './SensorTypeDropDown'
 import SensorNameDropDown from './SensorNameDropdown'
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import SortByDropDown from './SortByDropDown'
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -19,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 }))
 
-export default function Header() {
+function Header(props) {
     const classes = useStyles()
 
     return (
@@ -27,11 +30,21 @@ export default function Header() {
             <Toolbar>
                 <Typography variant="h6">Sensat</Typography>
             </Toolbar>
-            <div>
+            {props.currentPage === 'List' ? <div>
                 <SensorTypeDropDown />
                 <SensorNameDropDown />
-            </div>
+            </div> : <SortByDropDown />}
         </AppBar>
     );
 }
 
+
+function mapStateToProps(state) {
+    console.log('This is current page ', state.currentPage.page)
+    return {
+        currentPage: state.currentPage.page,
+    }
+}
+
+
+export default connect(mapStateToProps, null)(Header);

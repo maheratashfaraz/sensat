@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import React, { useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -7,10 +7,9 @@ import { bindActionCreators } from 'redux';
 
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import setSensorType from '../actions/setSensorType'
+import setSortBy from '../actions/setSortBy'
 
 
 
@@ -29,29 +28,27 @@ const useStyles = makeStyles((theme) => ({
 function SensorTypeDropdown(props) {
     const classes = useStyles()
 
-    const [type, setType] = React.useState('');
+    const [kind, setKind] = React.useState('');
 
     const handleChange = (event) => {
-        props.setSensorType(event.target.value)
+        // setType(event.target.value);
+        props.setSortBy(event.target.value)
     };
     useEffect(() => {
-        setType(props.sensorType)
-    }, [props.sensorType])
+        setKind(props.sortBy)
+    }, [props.sortBy])
 
     return (
         <FormControl className={classes.formControl} color='secondary'>
-            <InputLabel color='secondary' id="demo-simple-select-label">Sensor Type</InputLabel>
+            <InputLabel color='secondary' id="demo-simple-select-label">Sort By:</InputLabel>
             <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={type}
+                value={kind}
                 onChange={handleChange}
             >
-                <MenuItem value='O3'>O3</MenuItem>
-                <MenuItem value='NO2'>NO2</MenuItem>
-                <MenuItem value='CO'>CO</MenuItem>
-                <MenuItem value='TEMP'>TEMP</MenuItem>
-                <MenuItem value='RH'>RH</MenuItem>
+                <MenuItem value='date'>Date</MenuItem>
+                <MenuItem value='type'>Type</MenuItem>
             </Select>
         </FormControl>)
 }
@@ -59,13 +56,14 @@ function SensorTypeDropdown(props) {
 function mapStateToProps(state) {
     return {
         sensorType: state.sensorType.type,
+        sortBy: state.sortBy.kind
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
         dispatch,
         ...bindActionCreators({
-            setSensorType: setSensorType
+            setSortBy: setSortBy
         }, dispatch)
     }
 }

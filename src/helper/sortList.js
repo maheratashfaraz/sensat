@@ -7,8 +7,8 @@ export default function sortList(list, kind) {
             return 0;
         }
         if (kind === 'date') {
-            if (a.reading_ts < b.reading_ts) { return -1; }
-            if (a.reading_ts > b.reading_ts) { return 1; }
+            if (a.reading_ts > b.reading_ts) { return -1; }
+            if (a.reading_ts < b.reading_ts) { return 1; }
             return 0;
         }
 
