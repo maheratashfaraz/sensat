@@ -2,22 +2,13 @@ const Colors = {
     //theme colors
     dark: "#000000",
     purple: "#71368A",
-
-
-    //dataset markers colors
     golden: "#FFD700",
     red: "#cc2b1d",
     blue: "#6236FF",
-
-    //AQ sensor icon
     white: "#FFFFFF",
     darkGreen: "#327d4a",
     gray: "#A8A8A8",
-
-    //Drawer background
     grayLight: "#fafafa",
-
-    // Choropleth color bounds
     navy: '#004c6d',
     green: '#42f54e',
     orange: '#F28F3B',

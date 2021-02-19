@@ -8,6 +8,5 @@ export default function getDate(input) {
         + date.getHours() + ":"
         + date.getMinutes() + ":"
         + date.getSeconds())
-
 }
 

@@ -11,7 +11,6 @@ export default function sortList(list, kind) {
             if (a.reading_ts < b.reading_ts) { return 1; }
             return 0;
         }
-
     })
 }
 
